@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Catapp main page</title>
+    <link rel="stylesheet" href="{% static 'catapp/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'catapp/css/style.css' %}">
+</head>
+
+<body>
+    <div class="container-fluid w-25 p-3">
+        <div class="mb-3 custom-margin">
+            <form action="{% url 'catapp:create' %}" class="input-form" method="POST">
+                {% csrf_token %}
+                <h4 class="text-center w-75 mx-auto">Вас приветствует симулятор кота, для начала
+                    введите
+                    имя кота</h4>
+                <input type="text" class="form-control" id="exampleFormControlInput1" name="name"
+                    placeholder="Введите имя кота...">
+                <div class="d-grid gap-2 mt-5">
+                    <button class="btn btn-primary w-50 mx-auto" type="submit">Создать</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

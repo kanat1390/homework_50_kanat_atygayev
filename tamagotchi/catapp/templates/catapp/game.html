@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Game</title>
+    <link rel="stylesheet" href="{% static 'catapp/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'catapp/css/style.css' %}">
+</head>
+
+<body>
+    <div class="container-fluid w-50 p-3">
+        <div class="mb-3 custom-margin">
+            <div class="card mb-3" style="min-width:500px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{% static cat.image %}" class="img-fluid rounded-start" alt="cat"
+                            style="min-height:100%;">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <p class="card-text"><small class="text-muted">Кот - {{cat.name}}</small></p>
+                                </li>
+                                <li class="list-group-item">
+                                    <p class="card-text"><small class="text-muted">Возраст - {{cat.age}}</small></p>
+                                </li>
+                                <li class="list-group-item">
+                                    <p class="card-text"><small class="text-muted">Уровень счастья -
+                                            {{cat.happiness}}</small></p>
+                                </li>
+                                <li class="list-group-item">
+                                    <p class="card-text"><small class="text-muted">Уровень сытости -
+                                            {{cat.satiety}}</small></p>
+                                </li>
+                                <li class="list-group-item">
+                                    {% if cat.is_sleep %}
+                                    <p class="card-text"><small class="text-muted">Состояние: Кот спит... zzz</small>
+                                    </p>
+                                    {% else %}
+                                    <p class="card-text"><small class="text-muted">Состояние: Кот не
+                                            спит :)</small></p>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form action="{% url 'catapp:apply' %}" class="input-form" method="POST" style="min-width:500px;">
+                {% csrf_token %}
+                <select class="form-select" aria-label="Default select example" name="action">
+                    <option selected>Выберите действие</option>
+                    {%for action in actions %}
+                    <option value="{{action}}">{{action}}</option>
+                    {% endfor %}
+                </select>
+                <div class="d-grid gap-2 mt-5">
+                    <button class="btn btn-primary w-50 mx-auto" type="submit">Применить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
